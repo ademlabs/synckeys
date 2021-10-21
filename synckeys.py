@@ -80,16 +80,14 @@ def update_system_pairing(adapter_mac, device_mac, config):
 
 
 def print_device_info(device_config, device_mac):
-    print(f"  {device_mac} ", end='')
-
     if not device_config:
-        print('(# not paired #)')
+        print(f'  {device_mac} (# not paired #)')
         return
 
     # Get paired device name
     device_name = device_config['General']['Name']
     device_alias = device_config['General']['Alias']
-    print(f"({device_name} / {device_alias})")
+    print(f'\n  {device_mac} ({device_name} / {device_alias})')
 
 
 def print_update_values(name, current_value, new_value):
@@ -198,6 +196,8 @@ def print_adapter_mac(current_adapter_mac):
     # Only print the adapter mac information if we are starting for the first time or when we change adapter group of devices.
     # Will work only if we sort device and adapter\device pairs first such that they are grouped together.
     if _prev_adapter_mac != current_adapter_mac:
+        if _prev_adapter_mac != None:
+            print()
         print(f'Bluetooth Adapter - {current_adapter_mac}')
     _prev_adapter_mac = current_adapter_mac
 
