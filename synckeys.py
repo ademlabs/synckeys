@@ -10,6 +10,7 @@ from datetime import datetime
 # General global variables
 _prev_adapter_mac = None
 
+
 def format_hex(hex_string):
     return hex_string.replace('hex:', '').replace(',', '').upper()
 
