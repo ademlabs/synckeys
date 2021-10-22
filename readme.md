@@ -29,7 +29,7 @@ psexec -s -i regedit /e c:\keydump.reg HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\S
 ```
 sudo ./synckeys.py /path/to/keydump.reg
 ```
-9. The adapters and devices from the key dump will be compared to the pairing in Linux and if a difference is detected, it will prompt you to update the keys. You can choose Yes or No (default).
+9. The adapters and devices from the key dump will be compared to the pairing in Linux and if a difference is detected, it will prompt you to update the keys. You can choose Yes or No (default). If you choose `Yes`, a timestamped backup file is created in the `/var/lib/bluetooth/{ADAPTER_MAC}/{DEVICE_MAC}` directory before the update is performed.
 ```
 Bluetooth Adapter - 7C:B2:7D:57:EA:D5
   DC:0C:2D:ED:01:65 (# not paired #)
