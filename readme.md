@@ -1,13 +1,13 @@
 # BlueSync - Sync dual-boot Bluetooth devices
-Syncronize your Bluetooth device pairing keys from Windows to Linux.
+Syncronize your Bluetooth device pairing keys from Windows to Linux. Share your Bluetooth devices between these OSes without having to pair them each time.
 
 ## Warning / Disclaimer
 > The code and instructions within this project accesses and modifies system files on your Windows and Linux installations. Although care has been taken to ensure that nothing harmful happens, there could be a risk of damage to your software and hardware. Your usage of the program and instructions herein constitutes acceptance of those risks and the author cannot be held liable for any claims whatsoever.
 
 ## Pre-requisites
 On Linux you need the following:
-1. Python 3 installed on your Linux system.
-2. This project downloaded on your Linux system, or at least the `synckeys.py` file.
+1. Python 3 installed.
+2. This project downloaded on your filesystem, or at least the `synckeys.py` program file.
 3. **sudo** / **root** access.
 
 On Windows you need the following:
