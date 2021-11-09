@@ -5,6 +5,7 @@ import argparse
 import os
 import shutil
 import codecs
+import re
 from datetime import datetime
 
 # General global variables
@@ -36,7 +37,9 @@ def load_keys_from_file(file_path):
     # Load full file contents and clean up into a config parseable format
     with codecs.open(file_path, 'r', 'utf-16-le') as f:
         contents = f.read()
-        contents = contents.replace('"', '').replace('=', ' = ').replace('HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\BTHPORT\\Parameters\\Keys\\', '').split('\r\n')
+        contents = contents.replace('"', '').replace('=', ' = ')
+        contents = re.sub(r'HKEY_LOCAL_MACHINE\\SYSTEM\\.*?\\Services\\BTHPORT\\Parameters\\Keys\\', '', contents).split('\r\n')
+
         del contents[0:4]
         config_contents = '\n'.join(contents)
 
