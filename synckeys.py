@@ -90,7 +90,7 @@ def print_device_info(device_config, device_mac):
 
     # Get paired device name
     device_name = device_config['General']['Name']
-    device_alias = device_config['General']['Alias']
+    device_alias = device_config['General'].get('Alias', device_name)
     print(f'\n  {device_mac} ({device_name} / {device_alias})')
 
 
