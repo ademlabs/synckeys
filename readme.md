@@ -23,13 +23,20 @@ psexec -s -i regedit /e c:\keydump.reg HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\S
 ```
 4. Copy the file from `c:\keydump.reg` into a removeable storage or a location which is accessible by your Linux system.
 5. Reboot into your Linux system.
-6. Copy the `keydump.reg` file to an accessible location in your Linux filesystem.
-7. Open a terminal and navigate to the location where `synckeys.py` is located.
-8. Run the `synckeys.py` Python 3 script with **root** or **sudo**:
+6. Copy the `keydump.reg` file to an accessible location in your Linux filesystem and reboot your PC again to linux.
+7. If you are trying to sync a BLE device since modern BLE devices alter their MAC address with each new pairing. Hence, your script won't find the in OS1 paired device in OS2. In order to resolve this problem, just copy the setup in OS2 (Linux) to a folder with the MAC address as used in windows helps:
+```
+sudo cp -r /var/lib/bluetooth/<adapter>/<in-linux-paired-MAC> /var/lib/bluetooth/<adapter>/<in-windows-paired-MAC>
+```
+>**NOTE:** To get `<adapter>` MAC address, just type on a terminal `bluetoothctl` and then type `list` and for `<in-linux-paired-MAC>` inside `bluetoothctl` >type devices and search for the desired MAC address of the device. Finally, for `<in-windows-paired-MAC>` search in the `keydump.reg` file the same (except >for one digit) MAC address. After changing those address, run the command.
+
+
+8. Open a terminal and navigate to the location where `synckeys.py` is located.
+9. Run the `synckeys.py` Python 3 script with **root** or **sudo**:
 ```
 sudo ./synckeys.py /path/to/keydump.reg
 ```
-9. The adapters and devices from the key dump will be compared to the pairing in Linux and if a difference is detected, it will prompt you to update the keys. You can choose Yes or No (default). If you choose `Yes`, a timestamped backup file is created in the `/var/lib/bluetooth/{ADAPTER_MAC}/{DEVICE_MAC}` directory before the update is performed.
+10. The adapters and devices from the key dump will be compared to the pairing in Linux and if a difference is detected, it will prompt you to update the keys. You can choose Yes or No (default). If you choose `Yes`, a timestamped backup file is created in the `/var/lib/bluetooth/{ADAPTER_MAC}/{DEVICE_MAC}` directory before the update is performed.
 ```
 Bluetooth Adapter - 7C:B2:7D:57:EA:D5
   DC:0C:2D:ED:01:65 (# not paired #)
@@ -47,7 +54,7 @@ Bluetooth Adapter - 7C:B2:7D:57:EA:D5
     > Update keys for device? (y/N): y
     > OK!
 ```
-10. Once the keys are updated, you can restart the bluetooth service with the following (or the equivalent on your system):
+11. Once the keys are updated, you can restart the bluetooth service with the following (or the equivalent on your system):
 ```
 sudo systemctl restart bluetooth
 ```
